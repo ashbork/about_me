@@ -4,7 +4,7 @@ let typewriter = () => {
     let el = document.getElementById("hi");
     let delay = 100;
     let text = el.innerHTML;
-    el.innerHTML = "";
+    el.innerHTML = " ";
     let n = 0;
     let iv = setInterval(
         () => {
@@ -14,7 +14,9 @@ let typewriter = () => {
                 clearInterval(iv);
                 setTimeout(() => {
                     el.innerHTML = el.innerHTML.replace("Ash", "<span id='name'>Ash</span>");
+                    el.innerHTML = el.innerHTML + "<span id='cursor'>█</span>"
                 }, 200)
+
             }
 
         }, delay)
