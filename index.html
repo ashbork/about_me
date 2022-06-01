@@ -8,58 +8,116 @@
     <link rel="stylesheet" href="style.css">
     <title>personal page</title>
 </head>
-<body">
-    <canvas id="bganim"></canvas>
 
-    <button id="bganim_toggle">Stop animation</button>
+<body>
+    <div class="container">
+        <button id="bganim_toggle">Stop animation</button>
+        <canvas id="bganim"></canvas>
+        <div id="content">
+            <h2 id="hi">Hi, I'm Ash.</h2>
+            <div id="tooltip"><span id="errname">They/them</span> <span id="err">on/ona</span>
+                <hr id="rainbowrule"><a id="viewproblem" href="https://placekitten.com/g/1920/1080">View problem</a> <span
+                    id="quickfix">No
+                    quick fixes available.</span>
+            </div>
+            <div id="aboutme">
+                <p>
+                    I'm an amateur programmer, mostly interested in Python. This site is a website I wrote to
+                    try to remember
+                    my webdev courses from school. </p>
+                <p>I'm a contributor to <a href="">Rose Pine</a>, a theme for multiple applications. Actually, this site
+                    uses the Rose Pine theme with my favorite variant. My projects are pretty varied as I like trying
+                    new
+                    things.
+                </p>
 
-    <div id="container">
-        <span id="hi">Hi, I'm Ash.</span><span id='cursor'>█</span><div id="tooltip"></div>
-        <div id="aboutme">
-            <p>
-                I'm an amateur programmer, mostly interested in Python. This site is a website I wrote from scratch to
-                try to remember
-                my webdev courses from school. </p>
-            <p>I'm a contributor to <a href="">Rose Pine</a>, a theme for multiple applications. Actually, this site
-                uses the Rose Pine theme with my favorite variant. My projects are pretty varied as I like trying new
-                things. The latest is a
-                <i>control panel</i> for Minecraft using the <a><code>mcpi</code></a> library and Flask, both of which
-                were entirely unknown to me.
-            </p>
+                Please don't look at my <a href="http://">source code</a> (it's insecure)
 
-            Please don't look at my <a href="http://">source code</a> (it's insecure)
 
+            </div>
+            <div id="projects">
+                <h2><button id="proj_accordion">Projects</button></h2>
+                <div class="project">
+                    <h3>mcpi Control Panel</h3>
+                    <p>
+                        A control panel for Minecraft using the <a href="https://github.com/martinohanlon/mcpi"
+                            target="_blank">
+                            MCPI</a> library. It mplements a cursor which can move around and draw itself. Made with Flask
+                        and Bootstrap.
+                        <img src="static/mc.png" alt="Minecraft control panel">
+                    </p>
+                </div>
+                <div class="project">
+                    <h3>This site</h3>
+                    <p>
+                        In order to understand recursion, one must first understand recursion.
+                        <iframe src="index.html"></iframe>
+                        Hilarious, I know. I used Pts.js for the background animation, otherwise I wanted to avoid using
+                        any 3rd party libraries in order to
+                        try and figure things out myself. I can't make the animation sticky for whatever reason but I'm still pretty satisfied with the result.
+                    </p>
+                </div>
+                <div class="project">
+                    <h3>Rose Pine for KDE Plasma</h3>
+                    <p>
+                        <img src="static/rosepinekde.png" alt="Rose Pine KDE">
+                        I'm the sole maintainer (and possibly the only user too) of this theme. It's unfinished for a good reason - theming with Qt is
+                        one of the most painful experiences I've had. I'm kind of hoping it gets forgotten, though it does look pretty nice.
+                    </p>
+                <div class="project"></div>
+            </div>
         </div>
-    </div>
-    </body>
-    <script>
+</body>
+<script>
 
-        // implement the bganim toggle button. There should be three states: play, pause, hide
-        var bganim_toggle = document.getElementById('bganim_toggle');
-        var bganim = document.getElementById('bganim');
-        var states = {
-            "play": () => {
-                space.resume()
-                bganim.classList.remove('fadeout')
-                bganim.classList.add('fadein')
-                bganim_toggle.innerHTML = "Pause animation";
-                bganim_toggle.onclick = states["pause"];
-            },
-            "pause": () => {
-                bganim_toggle.innerHTML = "Hide animation";
-                bganim_toggle.onclick = states["hide"];
-                space.pause()
-            },
-            "hide": () => {
-                bganim.classList.remove('fadein')
-                bganim.classList.add("fadeout");
-                bganim_toggle.innerHTML = "Play animation";
-                bganim_toggle.onclick = states["play"];
-            }
+    let iframeEl = document.querySelector('iframe');
+    let nextQueryValue = !location.search ? 1 :
+        Number(location.search.split("?").pop()) + 1;
+    if (nextQueryValue < 4) {
+        iframeEl.src = `index.html?${nextQueryValue}`;
+    }
+    else {
+        iframeEl.src = "";
+    }
+    
+
+    // implement the bganim toggle button. There should be three states: play, pause, hide
+    let bganim_toggle = document.getElementById('bganim_toggle');
+    let bganim = document.getElementById('bganim');
+    let states = {
+        "play": () => {
+            space.resume()
+            bganim.classList.remove('fadeout')
+            bganim.classList.add('fadein')
+            bganim_toggle.innerHTML = "Pause animation";
+            bganim_toggle.onclick = states["pause"];
+        },
+        "pause": () => {
+            bganim_toggle.innerHTML = "Hide animation";
+            bganim_toggle.onclick = states["hide"];
+            space.pause()
+        },
+        "hide": () => {
+            bganim.classList.remove('fadein')
+            bganim.classList.add("fadeout");
+            bganim_toggle.innerHTML = "Play animation";
+            bganim_toggle.onclick = states["play"];
         }
-        bganim_toggle.onclick = states["play"];
-    </script>
-    <script src="lib/pts.js"></script>
-    <script src="anim.js"></script>
+    }
+    bganim_toggle.onclick = states["pause"];
+    setTimeout(() => {
+        var tooltip = document.getElementById('tooltip');
+        var name = document.getElementById('name');
+        name.addEventListener('mouseover', () => {
+            tooltip.classList.add('show');
+        });
+        name.addEventListener('mouseout', () => {
+            tooltip.classList.remove('show');
+        });
+    }, 2000);
+
+</script>
+<script src="lib/pts.js"></script>
+<script src="anim.js"></script>
 
 </html>
