@@ -22,7 +22,7 @@ let typewriter = () => {
 document.onload = typewriter();
 
 Pts.namespace(window);
-let space = new CanvasSpace("#bganim").setup({ bgcolor: "#191724"});
+let space = new CanvasSpace("#bganim").setup({ bgcolor: "#191724" });
 let form = space.getForm();
 
 (function () {
@@ -54,11 +54,11 @@ let form = space.getForm();
         action: (type, px, py) => {
             if (type == "drag") {
                 world.particle(0).lock = true;
-                if (world){world.particle(0).position = new Pt(px, py)}
+                if (world) { world.particle(0).position = new Pt(px, py) }
             }
             if (type == "drop") {
                 world.particle(0).lock = false;
-                world.particle(0).hit(px/2, py/2)
+                world.particle(0).hit(px / 2, py / 2)
             }
         }
     })
