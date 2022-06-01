@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,33 +17,38 @@
         <span id="hi">Hi, I'm Ash.</span><span id='cursor'>█</span>
         <div id="aboutme">
             <p>
-                I'm an amateur programmer, mostly interested in Python. This site is a website I wrote from scratch to try to remember
-                my webdev courses from school. I'm a contributor to <a href="">Rose Pine</a>, a theme for multiple applications. Actually, this site
-                uses the Rose Pine theme with my favorite variant. My projects are pretty varied as I like trying new things. The latest is a 
-                <i>control panel</i> for Minecraft using the <a><code>mcpi</code></a> library and Flask, both of which were entirely unknown to me.
-                
-                Please don't look at my source code. (It's insecure) <span id="cross_out">jk it's open source</span>
+                I'm an amateur programmer, mostly interested in Python. This site is a website I wrote from scratch to
+                try to remember
+                my webdev courses from school. </p>
+            <p>I'm a contributor to <a href="">Rose Pine</a>, a theme for multiple applications. Actually, this site
+                uses the Rose Pine theme with my favorite variant. My projects are pretty varied as I like trying new
+                things. The latest is a
+                <i>control panel</i> for Minecraft using the <a><code>mcpi</code></a> library and Flask, both of which
+                were entirely unknown to me.
             </p>
+
+            Please don't look at my source code (it's insecure)
+
         </div>
     </div>
-</body>
-<script>
-    // implement the bganim toggle button
-    var bganim_toggle = document.getElementById('bganim_toggle');
-    var bganim = document.getElementById('bganim');
-    bganim_toggle.addEventListener('click', function() {
-        if (bganim.classList.contains('fadeout')) {
-            bganim.classList.remove('fadeout');
-            bganim.classList.add('fadein');
-            bganim_toggle.innerHTML = 'Stop animation';
-        } else {
-            bganim.classList.remove('fadein');
-            bganim.classList.add('fadeout');
-            bganim_toggle.innerHTML = 'Start animation';
-        }
-    });
-</script>
-<script src="lib/pts.js"></script>
-<script src="anim.js"></script>
+    </body>
+    <script>
+        // implement the bganim toggle button
+        var bganim_toggle = document.getElementById('bganim_toggle');
+        var bganim = document.getElementById('bganim');
+        bganim_toggle.addEventListener('click', function () {
+            if (bganim.classList.contains('fadeout')) {
+                bganim.classList.remove('fadeout');
+                bganim.classList.add('fadein');
+                bganim_toggle.innerHTML = 'Stop animation';
+            } else {
+                bganim.classList.remove('fadein');
+                bganim.classList.add('fadeout');
+                bganim_toggle.innerHTML = 'Start animation';
+            }
+        });
+    </script>
+    <script src="lib/pts.js"></script>
+    <script src="anim.js"></script>
 
 </html>
