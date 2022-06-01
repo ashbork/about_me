@@ -78,6 +78,7 @@ div#container{
 #cursor{
     animation: phaseinout 1s infinite;
     animation-timing-function: ease-in;
+    color:#524f67;
 
 }
 
@@ -85,7 +86,7 @@ div#container{
     100%{
         text-decoration-style: wavy;
         text-decoration-color: #eb6f92;
-        text-decoration-line:underline;;
+        text-decoration-line:underline;
     }
 }
 
