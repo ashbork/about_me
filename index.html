@@ -14,7 +14,7 @@
     <button id="bganim_toggle">Stop animation</button>
 
     <div id="container">
-        <span id="hi">Hi, I'm Ash.</span><span id='cursor'>█</span>
+        <span id="hi">Hi, I'm Ash.</span><span id='cursor'>█</span><div id="tooltip"></div>
         <div id="aboutme">
             <p>
                 I'm an amateur programmer, mostly interested in Python. This site is a website I wrote from scratch to
@@ -27,26 +27,46 @@
                 were entirely unknown to me.
             </p>
 
-            Please don't look at my source code (it's insecure)
+            Please don't look at my <a href="http://">source code</a> (it's insecure)
 
         </div>
     </div>
     </body>
     <script>
-        // implement the bganim toggle button
+
+        // implement the bganim toggle button. There should be three states: play, pause, hide
         var bganim_toggle = document.getElementById('bganim_toggle');
         var bganim = document.getElementById('bganim');
-        bganim_toggle.addEventListener('click', function () {
-            if (bganim.classList.contains('fadeout')) {
-                bganim.classList.remove('fadeout');
-                bganim.classList.add('fadein');
-                bganim_toggle.innerHTML = 'Stop animation';
-            } else {
-                bganim.classList.remove('fadein');
-                bganim.classList.add('fadeout');
-                bganim_toggle.innerHTML = 'Start animation';
+        var states = {
+            "play": () => {
+                space.resume()
+                bganim.classList.remove('fadeout')
+                bganim.classList.add('fadein')
+                bganim_toggle.innerHTML = "Pause animation";
+                bganim_toggle.onclick = states["pause"];
+            },
+            "pause": () => {
+                bganim_toggle.innerHTML = "Hide animation";
+                bganim_toggle.onclick = states["hide"];
+                space.pause()
+            },
+            "hide": () => {
+                bganim.classList.remove('fadein')
+                bganim.classList.add("fadeout");
+                bganim_toggle.innerHTML = "Play animation";
+                bganim_toggle.onclick = states["play"];
             }
-        });
+        }
+        bganim_toggle.onclick = states["play"];
+
+
+
+        window.onblur = () => {
+            states["pause"]()
+        }
+        window.onfocus = () => {
+            states["play"]()
+        }
     </script>
     <script src="lib/pts.js"></script>
     <script src="anim.js"></script>
