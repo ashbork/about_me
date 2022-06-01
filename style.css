@@ -5,6 +5,14 @@ body{
 
 }
 
+a{
+    color: #ebbcba;
+    text-decoration: underline ;
+}
+a:hover{
+    color: #ebbcba;
+    text-decoration: none ;
+}
 
 
 #bganim{
