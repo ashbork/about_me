@@ -58,15 +58,6 @@
             }
         }
         bganim_toggle.onclick = states["play"];
-
-
-
-        window.onblur = () => {
-            states["pause"]()
-        }
-        window.onfocus = () => {
-            states["play"]()
-        }
     </script>
     <script src="lib/pts.js"></script>
     <script src="anim.js"></script>
