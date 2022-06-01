@@ -29,7 +29,7 @@ let form = space.getForm();
     let world;
     space.add({
         start: (bound, space) => {
-            world = new World(space.innerBound, 1, 5);
+            world = new World(space.innerBound, 1, 0);
             let pts = Create.distributeRandom(space.innerBound, 20)
             for (let i = 0; i < pts.length; i++) {
                 let p = new Particle(pts[i]).size(Num.randomRange(space.innerBound[1][0] / 40, space.innerBound[1][0] / 30));
@@ -44,14 +44,26 @@ let form = space.getForm();
                 form.fillOnly(color).point(p, p.radius, "circle")
                 // hit the particle with a random force every 2 seconds
                 if (time % 5000 < 100) {
-                    p.hit(Num.randomRange(-5, 5), Num.randomRange(-2,2))
+                    if (space.isPlaying) {
+                        p.hit(Num.randomRange(-5, 5), Num.randomRange(-2, 2))
+                    }
                 }
             })
             world.update(ftime)
         },
-        resize: (bound, evt) => {
-
+        action: (type, px, py) => {
+            if (type == "drag") {
+                world.particle(0).lock = true;
+                if (world){world.particle(0).position = new Pt(px, py)}
+            }
+            if (type == "drop") {
+                world.particle(0).lock = false;
+                world.particle(0).hit(px/2, py/2)
+            }
         }
     })
+
     space.play();
+    space.bindMouse().bindTouch();
 })();
+
