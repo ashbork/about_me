@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <title>personal page</title>
 </head>
 
@@ -35,8 +36,8 @@
 
 
             </div>
+            <h2 id="proj_accordion"><i id="accordion_arrow" class="bi bi-caret-right-fill"></i>Projects</h2>
             <div id="projects">
-                <h2><button id="proj_accordion">Projects</button></h2>
                 <div class="project">
                     <h3>mcpi Control Panel</h3>
                     <p>
@@ -115,6 +116,16 @@
             tooltip.classList.remove('show');
         });
     }, 2000);
+
+    // implement the accordion
+    let proj_accordion = document.getElementById('proj_accordion');
+    let projects = document.getElementById('projects');
+    let accordion_arrow = document.getElementById('accordion_arrow');
+    proj_accordion.addEventListener('click', () => {
+        projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
+        accordion_arrow.classList.toggle('open')
+    });
+
 
 </script>
 <script src="lib/pts.js"></script>
