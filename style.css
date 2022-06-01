@@ -149,6 +149,30 @@ div#content {
     font-size: 10px;
     font-family: "JetBrains Mono", monospace;
 }
+
+#projects {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+
+#proj_accordion:hover {
+    cursor: pointer;
+    background-color: #403d52;
+}
+
+/* animate the accordion arrow */
+.bi-caret-right-fill::before {
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+.bi-caret-right-fill.open::before {
+    transform: rotate(90deg);
+    transition: transform 0.2s;
+}
+
 #projects img {
 
     display: block;
