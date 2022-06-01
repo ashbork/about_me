@@ -31,11 +31,13 @@
     var bganim_toggle = document.getElementById('bganim_toggle');
     var bganim = document.getElementById('bganim');
     bganim_toggle.addEventListener('click', function() {
-        if (bganim.classList.contains('stopped')) {
-            bganim.classList.remove('stopped');
+        if (bganim.classList.contains('fadeout')) {
+            bganim.classList.remove('fadeout');
+            bganim.classList.add('fadein');
             bganim_toggle.innerHTML = 'Stop animation';
         } else {
-            bganim.classList.add('stopped');
+            bganim.classList.remove('fadein');
+            bganim.classList.add('fadeout');
             bganim_toggle.innerHTML = 'Start animation';
         }
     });
