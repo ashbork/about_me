@@ -32,7 +32,7 @@ let form = space.getForm();
             world = new World(space.innerBound, 1, 0);
             let pts = Create.distributeRandom(space.innerBound, 20)
             for (let i = 0; i < pts.length; i++) {
-                let p = new Particle(pts[i]).size(Num.randomRange(30, 60))
+                let p = new Particle(pts[i]).size(Num.randomRange(space.innerBound[1][0] / 40, space.innerBound[1][0] / 30));
                 p.hit(Num.randomRange(-50, 50), Num.randomRange(-50, 50))
                 world.add(p)
             }
@@ -50,9 +50,7 @@ let form = space.getForm();
             world.update(ftime)
         },
         resize: (bound, evt) => {
-            if (world){
-                this.start(space.innerBound, space)
-            }
+
         }
     })
     space.play();
