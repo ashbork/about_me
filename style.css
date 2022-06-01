@@ -1,0 +1,98 @@
+body{
+    background-color: #191724;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+
+}
+
+@keyframes phasein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#bganim{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #191724;
+    animation: phasein 0.7s ease;
+    transition: 0.7;
+}
+
+#bganim_toggle{
+    position: absolute;
+    /* align to top right */
+    top: 10px;
+    right: 10px;
+    opacity: 1;
+    z-index: 1;
+    background-color: #eb6f92;
+    color: #191724;
+    border: none;
+    font-family: "JetBrains Mono", monospace;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#bganim_toggle:hover{
+    background-color: #26233a;
+    color: #eb6f92;
+    transition: 0.3s;
+}
+
+#bganim_toggle:active{
+    background-color: #191724;
+    color: #eb6f92;
+    transition: 0.3s;
+}
+
+#bganim.stopped{
+    opacity: 0;
+    transition:0.7s;
+}
+
+
+
+
+div#container{
+    width:50%;
+    margin:0 auto;
+    background-color: #26233a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.11);
+    color:#e0def4;
+    position: relative;
+}
+
+@keyframes phaseinout{
+    0%{opacity:0;}
+    50%{opacity:0.8;}
+    100%{opacity:0;}
+}
+
+#cursor{
+    animation: phaseinout 1s infinite;
+    animation-timing-function: ease-in;
+
+}
+
+@keyframes squiggly{
+    100%{
+        text-decoration-style: wavy;
+        text-decoration-color: #eb6f92;
+        text-decoration-line:underline;;
+    }
+}
+
+#name{
+    color:#c4a7e7;
+    font-style: italic;
+    animation: squiggly 0.7s forwards;
+}
