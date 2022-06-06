@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <button id="bganim_toggle">Stop animation</button>
-        <canvas id="bganim"></canvas>
+        <canvas id="bganim" aria-label="Background animation"></canvas>
         <div id="content">
             <h2 id="hi">Hi, I'm Ash.</h2>
             <div id="tooltip"><span id="errname">They/them</span> <span id="err">on/ona</span>
-                <hr id="rainbowrule"><a id="viewproblem" href="https://placekitten.com/g/1920/1080">View problem</a> <span
-                    id="quickfix">No
+                <hr id="rainbowrule"><a id="viewproblem" href="https://placekitten.com/g/1920/1080">View problem</a>
+                <span id="quickfix">No
                     quick fixes available.</span>
             </div>
             <div id="aboutme">
@@ -26,25 +26,29 @@
                     I'm an amateur programmer, mostly interested in Python. This site is a website I wrote to
                     try to remember
                     my webdev courses from school.
-                    <p>This site
+                <p>This site
                     uses the Rose Pine theme with my favorite variant. My projects are pretty varied as I like trying
                     new
                     things. This is one of them, hence all of the problems, I hadn't touched js for years.</p>
                 </p>
 
 
-                Please don't look at my <a href="https://github.com/maybork/about_me" target="_blank">source code</a> (it's insecure)
+                Please don't look at my <a href="https://github.com/maybork/about_me" target="_blank">source code</a>
+                (it's insecure)
 
 
             </div>
-            <h2 id="proj_accordion"><i id="accordion_arrow" class="bi bi-caret-right-fill"></i>Projects</h2>
+            <h2 id="proj_accordion" tabindex="0"><i id="accordion_arrow" class="bi bi-caret-right-fill"></i>Projects
+            </h2>
             <div id="projects">
                 <div class="project">
-                    <h3>mcpi Control Panel <a class="source" href="https://github.com/maybork/mcpi-webapp">[source]</a></h3>
+                    <h3>mcpi Control Panel <a class="source" href="https://github.com/maybork/mcpi-webapp">[source]</a>
+                    </h3>
                     <p>
                         A control panel for Minecraft using the <a href="https://github.com/martinohanlon/mcpi"
                             target="_blank">
-                            MCPI</a> library. It mplements a cursor which can move around and draw itself. Made with Flask
+                            MCPI</a> library. It mplements a cursor which can move around and draw itself. Made with
+                        Flask
                         and Bootstrap.
                         <img src="static/mc.png" alt="Minecraft control panel">
                     </p>
@@ -53,35 +57,59 @@
                     <h3>This site <a class="source" href="https://github.com/maybork/about_me">[source]</a></h3>
                     <p>
                         In order to understand recursion, one must first understand recursion.
-                        <iframe src="index.html"></iframe>
+                        <iframe src="index.html" title="An iframe containing this website." tabindex="-1"></iframe>
                         Hilarious, I know. I used Pts.js for the background animation, otherwise I wanted to avoid using
                         any 3rd party libraries in order to
-                        try and figure things out myself. I can't make the animation sticky for whatever reason but I'm still pretty satisfied with the result.
+                        try and figure things out myself. I can't make the animation sticky for whatever reason but I'm
+                        still pretty satisfied with the result.
                     </p>
                 </div>
                 <div class="project">
-                    <h3>Rose Pine for KDE Plasma <a class="source" href="https://github.com/maybork/kde">[source]</a></h3>
+                    <h3>Rose Pine for KDE Plasma <a class="source" href="https://github.com/maybork/kde">[source]</a>
+                    </h3>
                     <p>
                         <img src="static/rosepinekde.png" alt="Rose Pine KDE">
-                        I'm the sole maintainer (and possibly the only user too) of this theme. It's unfinished for a good reason - theming with Qt is
-                        one of the most painful experiences I've had. I'm kind of hoping it gets forgotten, though it does look pretty nice.
+                        I'm the sole maintainer (and possibly the only user too) of this theme. It's unfinished for a
+                        good reason - theming with Qt is
+                        one of the most painful experiences I've had. I'm kind of hoping it gets forgotten, though it
+                        does look pretty nice.
                     </p>
-                <div class="project"></div>
+                    <div class="project"></div>
+                </div>
             </div>
-        </div>
 </body>
 <script>
+    (() => {
+        let iframeEl = document.querySelector('iframe');
+        let nextQueryValue = !location.search ? 1 :
+            Number(location.search.split("?").pop()) + 1;
+        if (nextQueryValue < 4) {
+            iframeEl.src = `index.html?${nextQueryValue}`;
+        }
+        else {
+            iframeEl.src = "";
+        }
+        //make all elements in the iframe non-focusable
+        iframeEl.contentWindow.document.querySelectorAll('*').forEach(el => {
+            el.tabIndex = -1;
+        });
+    })();
+    function a11yClick(event) {
+        //from https://karlgroves.com/ridiculously-easy-trick-for-keyboard-accessibility/
+        if (event.type === 'click') {
+            return true;
+        }
+        else if (event.type === 'keypress') {
+            var code = event.charCode || event.keyCode;
+            if ((code === 32) || (code === 13)) {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 
-    let iframeEl = document.querySelector('iframe');
-    let nextQueryValue = !location.search ? 1 :
-        Number(location.search.split("?").pop()) + 1;
-    if (nextQueryValue < 4) {
-        iframeEl.src = `index.html?${nextQueryValue}`;
-    }
-    else {
-        iframeEl.src = "";
-    }
-    
 
     // implement the bganim toggle button. There should be three states: play, pause, hide
     let bganim_toggle = document.getElementById('bganim_toggle');
@@ -118,13 +146,42 @@
         });
     }, 2000);
 
-    // implement the accordion
-    let proj_accordion = document.getElementById('proj_accordion');
-    let projects = document.getElementById('projects');
-    let accordion_arrow = document.getElementById('accordion_arrow');
-    proj_accordion.addEventListener('click', () => {
-        projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
-        accordion_arrow.classList.toggle('open')
+    const projects = document.getElementById('projects');
+    (() => {
+        projects.querySelectorAll('a').forEach(el => {
+            el.tabIndex = -1;
+        }
+        )
+    })();
+
+    
+    const proj_accordion = document.getElementById('proj_accordion');
+    const accordion_arrow = document.getElementById('accordion_arrow');
+    proj_accordion.addEventListener('click', (event) => {
+            projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
+            projects.querySelectorAll('a').forEach(el => {
+                if (el.tabIndex == 0) {
+                    el.tabIndex = -1;
+                }
+                else {
+                    el.tabIndex = 0;
+                }
+            });
+            accordion_arrow.classList.toggle('open')
+    });
+    proj_accordion.addEventListener('keypress', (event) => {
+        if (a11yClick(event)) {
+            projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
+            projects.querySelectorAll('a').forEach(el => {
+                if (el.tabIndex == 0) {
+                    el.tabIndex = -1;
+                }
+                else {
+                    el.tabIndex = 0;
+                }
+            });
+            accordion_arrow.classList.toggle('open')
+        }
     });
 
 
