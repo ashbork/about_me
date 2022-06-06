@@ -63,6 +63,11 @@ a:focus {
     color: #eb6f92;
     transition: 0.3s;
 }
+#bganim_toggle:focus {
+    background-color: #26233a;
+    color: #eb6f92;
+    transition: 0.3s;
+}
 
 #bganim_toggle:active {
     background-color: #191724;
