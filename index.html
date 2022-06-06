@@ -38,7 +38,7 @@
 
 
             </div>
-            <h2 id="proj_accordion" tabindex="0"><i id="accordion_arrow" class="bi bi-caret-right-fill"></i>Projects
+            <h2 id="proj_accordion" tabindex="0"><i id="accordion_arrow" class="bi bi-caret-right-fill" role="button"></i>Projects
             </h2>
             <div id="projects">
                 <div class="project">
@@ -154,11 +154,11 @@
         )
     })();
 
+    function accordion(){
+        const proj_accordion = document.getElementById('proj_accordion');
+        const accordion_arrow = document.getElementById('accordion_arrow');
     
-    const proj_accordion = document.getElementById('proj_accordion');
-    const accordion_arrow = document.getElementById('accordion_arrow');
-    proj_accordion.addEventListener('click', (event) => {
-            projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
+        projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
             projects.querySelectorAll('a').forEach(el => {
                 if (el.tabIndex == 0) {
                     el.tabIndex = -1;
@@ -168,19 +168,14 @@
                 }
             });
             accordion_arrow.classList.toggle('open')
+    }
+    
+    proj_accordion.addEventListener('click', (event) => {
+            accordion()
     });
     proj_accordion.addEventListener('keypress', (event) => {
         if (a11yClick(event)) {
-            projects.style.maxHeight = projects.style.maxHeight ? null : projects.scrollHeight + "px";
-            projects.querySelectorAll('a').forEach(el => {
-                if (el.tabIndex == 0) {
-                    el.tabIndex = -1;
-                }
-                else {
-                    el.tabIndex = 0;
-                }
-            });
-            accordion_arrow.classList.toggle('open')
+            accordion()
         }
     });
 
