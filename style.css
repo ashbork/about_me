@@ -10,8 +10,14 @@ a {
     text-decoration: underline;
 }
 a:hover {
-    color: #ebbcba;
     text-decoration: none;
+    background-color: #9ccfd8;
+    color: #26233a
+}
+
+a:focus {
+    background-color: #9ccfd8;
+    color: #26233a
 }
 
 
@@ -164,6 +170,10 @@ div#content {
 #proj_accordion:hover {
     cursor: pointer;
     background-color: #403d52;
+}
+#proj_accordion:focus {
+    background-color: #403d52;
+    border: #eb6f92 solid 1px;
 }
 
 /* animate the accordion arrow */
